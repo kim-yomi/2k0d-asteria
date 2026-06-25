@@ -265,9 +265,14 @@ Ka-Dunong exists to make high-quality, personalized education more accessible fo
 
 • User-level adaptation
 
+• Offline functionalities
+
 • Planner/Schedules feature
+
 • Note taker feature
+
 • Smart Module Scanner feature
+
 • Gamification features
 
 ---
