@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
 
-const client = new Anthropic();
+const DEFAULT_MODEL = "claude-sonnet-4-6";
 
 const SYSTEM_PROMPT = `You are Ka-Dunong, an AI study companion for Filipino K-12 students. 
 You were made to help students truly understand their lessons — hindi para ibigay ang sagot, kundi para gabayan sila para mahanap nila mismo ang sagot.
@@ -94,11 +94,77 @@ The student never sees this — it is parsed by the app for progress tracking.
 
 understoodCorrectly should only be true when the student demonstrates understanding of WHY or HOW something works — not just surface recall facts.`;
 
+function getErrorStatus(error: unknown) {
+  if (typeof error === "object" && error !== null && "status" in error) {
+    const status = (error as { status?: unknown }).status;
+    return typeof status === "number" ? status : null;
+  }
+
+  return null;
+}
+
+function hasConnectionError(error: unknown) {
+  const serialized = String(error);
+
+  if (serialized.includes("Connection error")) {
+    return true;
+  }
+
+  if (typeof error === "object" && error !== null && "cause" in error) {
+    return String((error as { cause?: unknown }).cause).includes("fetch failed");
+  }
+
+  return false;
+}
+
+function getClientErrorMessage(error: unknown) {
+  const status = getErrorStatus(error);
+
+  if (hasConnectionError(error)) {
+    return "Could not connect to Claude. Check your internet connection, firewall, VPN, or dev sandbox network permissions.";
+  }
+
+  if (status === 401) {
+    return "Claude rejected the API key. Check ANTHROPIC_API_KEY in ka-dunong/.env.local, then restart the dev server.";
+  }
+
+  if (status === 404) {
+    return "Claude could not find the configured model. Check ANTHROPIC_MODEL, or remove it to use claude-sonnet-4-6.";
+  }
+
+  if (status === 429) {
+    return "Claude rate limit reached. Please wait a bit and try again.";
+  }
+
+  return "Claude request failed. Check the terminal logs for the full API error.";
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { messages, grade, subject, languageMode, moduleContext } = await req.json();
 
-const contextBlock = `
+    if (!Array.isArray(messages) || messages.length === 0) {
+      return NextResponse.json(
+        { error: "Please send at least one message." },
+        { status: 400 }
+      );
+    }
+
+    const apiKey = process.env.ANTHROPIC_API_KEY;
+
+    if (!apiKey) {
+      return NextResponse.json(
+        {
+          error:
+            "Missing ANTHROPIC_API_KEY. Add it to ka-dunong/.env.local, then restart the dev server.",
+        },
+        { status: 500 }
+      );
+    }
+
+    const client = new Anthropic({ apiKey });
+
+    const contextBlock = `
 Student grade: ${grade || "8"}
 Subject: ${subject || "General"}
 Language mode: ${languageMode || "Taglish"}
@@ -114,19 +180,29 @@ ${moduleContext ? `\nUploaded module content (tutor based on this):\n${moduleCon
     ];
 
     const response = await client.messages.create({
-      model: "claude-sonnet-4-6",
+      model: process.env.ANTHROPIC_MODEL || DEFAULT_MODEL,
       max_tokens: 1024,
       system: SYSTEM_PROMPT,
       messages: messagesWithContext,
     });
 
-    const fullText =
-      response.content[0].type === "text" ? response.content[0].text : "";
+    const fullText = response.content
+      .filter((block) => block.type === "text")
+      .map((block) => block.text)
+      .join("\n")
+      .trim();
+
+    if (!fullText) {
+      return NextResponse.json(
+        { error: "Claude returned an empty response." },
+        { status: 502 }
+      );
+    }
 
     // Parse out the progress JSON and the visible message separately
     const progressMatch = fullText.match(/<progress>([\s\S]*?)<\/progress>/);
     let progressData = null;
-    let visibleMessage = fullText
+    const visibleMessage = fullText
       .replace(/<progress>[\s\S]*?<\/progress>/, "")
       .trim();
 
@@ -141,6 +217,9 @@ ${moduleContext ? `\nUploaded module content (tutor based on this):\n${moduleCon
     return NextResponse.json({ message: visibleMessage, progress: progressData });
   } catch (error) {
     console.error("API error:", error);
-    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
+    return NextResponse.json(
+      { error: getClientErrorMessage(error) },
+      { status: getErrorStatus(error) || 500 }
+    );
   }
 }

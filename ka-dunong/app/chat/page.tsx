@@ -35,6 +35,12 @@ function generateSessionId() {
   return `session_${Date.now()}`;
 }
 
+function getErrorMessage(error: unknown) {
+  return error instanceof Error
+    ? error.message
+    : "Sorry, may problema. Subukan ulit.";
+}
+
 function KaDunongBookIcon({ size = 18, color = "white" }: { size?: number; color?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 79.511719 69.09375" fill="none">
@@ -99,32 +105,44 @@ export default function KaDunong() {
         }),
       });
 
-      const data = await res.json();
+      const data = (await res.json()) as {
+        message?: string;
+        progress?: ProgressData;
+        error?: string;
+      };
 
-      if (data.message) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.message },
-        ]);
-
-        if (data.progress && progress) {
-          const updated = updateProgressFromAI(
-            progress,
-            data.progress as ProgressData,
-            sessionId,
-            subject,
-            grade
-          );
-          setProgress(updated);
-          saveProgress(updated);
-        }
+      if (!res.ok) {
+        throw new Error(data.error || "Sorry, may problema sa Claude API.");
       }
-    } catch {
+
+      const assistantMessage = data.message?.trim();
+
+      if (!assistantMessage) {
+        throw new Error(data.error || "Walang sagot ang Claude API.");
+      }
+
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: assistantMessage },
+      ]);
+
+      if (data.progress && progress) {
+        const updated = updateProgressFromAI(
+          progress,
+          data.progress,
+          sessionId,
+          subject,
+          grade
+        );
+        setProgress(updated);
+        saveProgress(updated);
+      }
+    } catch (error) {
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: "Sorry, may problema. Subukan ulit.",
+          content: getErrorMessage(error),
         },
       ]);
     } finally {
