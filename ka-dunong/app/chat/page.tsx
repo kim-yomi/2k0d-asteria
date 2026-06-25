@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Send, BookOpen, BarChart2, ChevronDown, ArrowLeft, Upload } from "lucide-react";
+import { Send, BookOpen, BarChart2, CalendarDays, ChevronDown, ArrowLeft, Upload } from "lucide-react";
 import {
   loadProgress,
   saveProgress,
@@ -264,6 +264,13 @@ export default function KaDunong() {
         </div>
 
         <div className="flex items-center gap-2">
+          <Link
+            href="/planner"
+            className="p-2 rounded-lg transition-colors text-white/40 hover:text-white hover:bg-white/5"
+            title="Study Planner"
+          >
+            <CalendarDays size={18} />
+          </Link>
           <button
             onClick={() => setView("chat")}
             className={`p-2 rounded-lg transition-colors ${view === "chat" ? "bg-[#c97e82]/20 text-[#e8b5b7]" : "text-white/40 hover:text-white"}`}
