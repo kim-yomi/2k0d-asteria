@@ -270,7 +270,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Bird + speech bubble — bottom-left of chat, bubble overlaps chat bottom */}
+            {/* Bird — bottom-left of chat */}
             <div className="absolute bottom-10 left-[-20%] flex items-end gap-0 z-20 group cursor-default">
               <Image
                 src="/bird-happy.png"
@@ -279,7 +279,6 @@ export default function HomePage() {
                 height={310}
                 className="object-contain drop-shadow-md transition-transform duration-300 ease-out group-hover:-translate-y-5"
               />
-              
             </div>
           </div>
         </div>
