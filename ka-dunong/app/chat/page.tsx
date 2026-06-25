@@ -6,6 +6,7 @@ import {
   Send,
   BookOpen,
   BarChart2,
+  CalendarDays,
   ChevronDown,
   ArrowLeft,
   Upload,
