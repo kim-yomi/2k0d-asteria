@@ -20,6 +20,12 @@
 # production
 /build
 
+# local RAG backend data
+/backend/.data/
+/backend/.venv/
+__pycache__/
+*.pyc
+
 # misc
 .DS_Store
 *.pem

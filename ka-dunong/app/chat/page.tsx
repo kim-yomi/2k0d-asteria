@@ -1,8 +1,7 @@
 "use client";
-import { extractTextFromPDF } from "@/lib/pdf";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Send, BookOpen, BarChart2, ChevronDown, ArrowLeft } from "lucide-react";
+import { Send, BookOpen, BarChart2, ChevronDown, ArrowLeft, Upload } from "lucide-react";
 import {
   loadProgress,
   saveProgress,
@@ -16,6 +15,29 @@ import {
 interface Message {
   role: "user" | "assistant";
   content: string;
+  sources?: Source[];
+}
+
+interface Source {
+  document_id: string;
+  filename: string;
+  page_number: number | null;
+  chunk_index: number;
+  score: number;
+  text: string;
+}
+
+interface MaterialUploadResponse {
+  document_id?: string;
+  filename?: string;
+  chunk_count?: number;
+  page_count?: number;
+  ocr?: {
+    enabled: boolean;
+    used: boolean;
+    unavailable: boolean;
+  };
+  error?: string;
 }
 
 const SUBJECTS = [
@@ -31,8 +53,21 @@ const LANGUAGE_LABELS: Record<LanguageMode, string> = {
   english: "English",
 };
 
+const STUDENT_ID_KEY = "ka-dunong-student-id";
+
 function generateSessionId() {
   return `session_${Date.now()}`;
+}
+
+function getOrCreateStudentId() {
+  if (typeof window === "undefined") return "local-student";
+
+  const stored = localStorage.getItem(STUDENT_ID_KEY);
+  if (stored) return stored;
+
+  const nextId = `student_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+  localStorage.setItem(STUDENT_ID_KEY, nextId);
+  return nextId;
 }
 
 function getErrorMessage(error: unknown) {
@@ -68,11 +103,12 @@ export default function KaDunong() {
   const [view, setView] = useState<"chat" | "progress">("chat");
   const [progress, setProgress] = useState<KaDunongProgress | null>(null);
   const [sessionId] = useState(generateSessionId);
+  const [studentId] = useState(getOrCreateStudentId);
   const [showSubjectMenu, setShowSubjectMenu] = useState(false);
   const [showGradeMenu, setShowGradeMenu] = useState(false);
-  const [moduleContext, setModuleContext] = useState<string | null>(null);
   const [moduleFileName, setModuleFileName] = useState<string | null>(null);
-  const [uploadingPDF, setUploadingPDF] = useState(false);
+  const [documentIds, setDocumentIds] = useState<string[]>([]);
+  const [uploadingMaterial, setUploadingMaterial] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -97,17 +133,27 @@ export default function KaDunong() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: newMessages,
+          studentId,
+          question: userMessage.content,
+          messages: newMessages.map((message) => ({
+            role: message.role,
+            content: message.content,
+          })),
           grade,
           subject,
           languageMode,
-          moduleContext,
+          documentIds,
+          weakTopics: progress?.weakAreas
+            .filter((area) => area.subject === subject)
+            .map((area) => area.topic)
+            .slice(0, 8) || [],
         }),
       });
 
       const data = (await res.json()) as {
         message?: string;
         progress?: ProgressData;
+        sources?: Source[];
         error?: string;
       };
 
@@ -123,7 +169,7 @@ export default function KaDunong() {
 
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: assistantMessage },
+        { role: "assistant", content: assistantMessage, sources: data.sources || [] },
       ]);
 
       if (data.progress && progress) {
@@ -157,25 +203,49 @@ export default function KaDunong() {
     }
   }
 
-  async function handlePDFUpload(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleMaterialUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploadingPDF(true);
+
+    const extension = file.name.split(".").pop()?.toLowerCase();
+    if (extension !== "pdf" && extension !== "docx") {
+      alert("PDF o DOCX lang muna ang puwedeng i-upload.");
+      e.target.value = "";
+      return;
+    }
+
+    setUploadingMaterial(true);
     try {
-      const text = await extractTextFromPDF(file);
-      setModuleContext(text);
-      setModuleFileName(file.name);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("student_id", studentId);
+      formData.append("subject", subject);
+      formData.append("grade_level", grade);
+
+      const res = await fetch("/api/materials", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = (await res.json()) as MaterialUploadResponse;
+
+      if (!res.ok || !data.document_id) {
+        throw new Error(data.error || "Hindi ma-process ang learning material.");
+      }
+
+      setDocumentIds((prev) => [...prev, data.document_id as string]);
+      setModuleFileName(data.filename || file.name);
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: `Na-upload na ang "${file.name}". Handa na akong tumulong sa iyo base sa module na 'to. Ano ang hindi mo naiintindihan dito?`,
+          content: `Na-upload na ang "${data.filename || file.name}" at na-index ang ${data.chunk_count || 0} bahagi nito. Handa na akong tumulong base sa module na 'to. Ano ang hindi mo naiintindihan dito?`,
         },
       ]);
-    } catch {
-      alert("Hindi ma-read ang PDF. Subukan ulit.");
+    } catch (error) {
+      alert(getErrorMessage(error));
     } finally {
-      setUploadingPDF(false);
+      setUploadingMaterial(false);
       e.target.value = "";
     }
   }
@@ -322,6 +392,20 @@ export default function KaDunong() {
                   }`}
                 >
                   {msg.content}
+                  {msg.role === "assistant" && msg.sources && msg.sources.length > 0 && (
+                    <div className="mt-3 pt-3 border-t border-white/10 flex flex-wrap gap-1.5">
+                      {msg.sources.slice(0, 3).map((source, sourceIndex) => (
+                        <span
+                          key={`${source.document_id}-${source.chunk_index}-${sourceIndex}`}
+                          className="text-[11px] leading-tight px-2 py-1 rounded-md bg-[#3d9185]/15 text-[#80bbb2]"
+                          title={source.text}
+                        >
+                          {source.filename}
+                          {source.page_number ? ` p.${source.page_number}` : ""}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -350,7 +434,7 @@ export default function KaDunong() {
                 <div className="w-2 h-2 rounded-full bg-[#3d9185]" />
                 <span className="text-xs text-white/40 truncate">{moduleFileName}</span>
                 <button
-                  onClick={() => { setModuleContext(null); setModuleFileName(null); }}
+                  onClick={() => { setDocumentIds([]); setModuleFileName(null); }}
                   className="text-xs text-white/20 hover:text-white ml-auto"
                 >
                   Remove
@@ -358,25 +442,21 @@ export default function KaDunong() {
               </div>
             )}
             <div className="flex items-end gap-2 bg-white/5 border border-white/10 rounded-2xl px-4 py-3">
-              <label className={`cursor-pointer flex-shrink-0 ${uploadingPDF ? "opacity-30" : "opacity-50 hover:opacity-100"} transition-opacity`}>
+              <label className={`cursor-pointer flex-shrink-0 ${uploadingMaterial ? "opacity-30" : "opacity-50 hover:opacity-100"} transition-opacity`}>
                 <input
                   type="file"
-                  accept=".pdf"
+                  accept=".pdf,.docx"
                   className="hidden"
-                  onChange={handlePDFUpload}
-                  disabled={uploadingPDF}
+                  onChange={handleMaterialUpload}
+                  disabled={uploadingMaterial}
                 />
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="17 8 12 3 7 8"/>
-                  <line x1="12" y1="3" x2="12" y2="15"/>
-                </svg>
+                <Upload size={18} />
               </label>
               <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKey}
-                placeholder={uploadingPDF ? "Nag-uupload..." : "Mag-type ng tanong o topic..."}
+                placeholder={uploadingMaterial ? "Ina-index ang module..." : "Mag-type ng tanong o topic..."}
                 rows={1}
                 className="flex-1 bg-transparent text-sm text-white placeholder-white/30 resize-none outline-none max-h-32"
                 style={{ minHeight: "24px" }}
