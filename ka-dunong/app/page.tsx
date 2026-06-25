@@ -119,7 +119,7 @@ export default function HomePage() {
       <nav className="sticky top-0 z-50 bg-white border-b border-[#3d3535]/10 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/bird-curious.png" alt="Dunong mascot" width={32} height={32} className="object-contain" />
+            <Image src="/bird-app.png" alt="Dunong mascot" width={32} height={32} className="object-contain" />
             <span className="font-bold text-lg text-[#3d3535]">
               Ka-Dunong<span className="text-[#c97e82]">.ai</span>
             </span>
@@ -201,7 +201,7 @@ export default function HomePage() {
                 <CheckCircle size={14} className="text-[#c97e82]" /> Libre
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle size={14} className="text-[#c97e82]" /> Walang account
+                <CheckCircle size={14} className="text-[#c97e82]" /> Offline learning
               </span>
               <span className="flex items-center gap-1.5">
                 <CheckCircle size={14} className="text-[#c97e82]" /> Lahat ng DepEd subjects
@@ -493,7 +493,7 @@ export default function HomePage() {
             <div className="max-w-xs">
               <div className="flex items-center gap-3 mb-3">
                 <Image
-                  src="/bird-curious.png"
+                  src="/bird-app.png"
                   alt="Dunong"
                   width={40}
                   height={40}
