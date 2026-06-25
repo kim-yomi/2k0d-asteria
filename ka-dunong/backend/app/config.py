@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     tesseract_cmd: str = ""
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=Path(__file__).resolve().parents[1] / ".env",
         env_file_encoding="utf-8",
         extra="ignore",
     )
@@ -32,6 +32,10 @@ class Settings(BaseSettings):
     @property
     def upload_dir(self) -> Path:
         return self.data_dir / "uploads"
+
+    @property
+    def deped_knowledge_dir(self) -> Path:
+        return self.backend_dir / "knowledge" / "deped"
 
     @property
     def qdrant_dir(self) -> Path:

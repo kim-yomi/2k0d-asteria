@@ -2,8 +2,9 @@ from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import Settings
-from app.models import ChatRequest, ChatResponse, MaterialResponse
+from app.models import AdminStats, ChatRequest, ChatResponse, MaterialResponse
 from app.services.rag.pipeline import RagPipeline
+from app.services.rag.vector_store import get_collection_stats
 
 settings = Settings()
 pipeline: RagPipeline | None = None
@@ -59,3 +60,11 @@ async def chat(request: ChatRequest) -> ChatResponse:
         raise HTTPException(status_code=400, detail=str(error)) from error
     except Exception as error:
         raise HTTPException(status_code=500, detail=f"Chat request failed: {error}") from error
+
+
+@app.get("/v1/admin/stats", response_model=AdminStats)
+def admin_stats() -> AdminStats:
+    try:
+        return get_collection_stats(settings)
+    except Exception as error:
+        raise HTTPException(status_code=500, detail=f"Stats request failed: {error}") from error

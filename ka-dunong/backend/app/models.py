@@ -40,6 +40,10 @@ class ChatRequest(BaseModel):
 class Source(BaseModel):
     document_id: str
     filename: str
+    source: str = "student"
+    relative_path: str | None = None
+    subject: str | None = None
+    grade_level: str | None = None
     page_number: int | None = None
     chunk_index: int
     score: float
@@ -50,3 +54,10 @@ class ChatResponse(BaseModel):
     message: str
     progress: dict | None = None
     sources: list[Source] = Field(default_factory=list)
+
+
+class AdminStats(BaseModel):
+    deped_documents: int
+    student_documents: int
+    total_chunks: int
+    collection: str

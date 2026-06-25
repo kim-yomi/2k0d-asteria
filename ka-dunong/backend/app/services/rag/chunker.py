@@ -1,5 +1,6 @@
-from llama_index.core.node_parser import SentenceSplitter
 import uuid
+
+from llama_index.core.node_parser import SentenceSplitter
 
 from app.config import Settings
 from app.services.rag.types import DocumentChunk, ExtractedBlock
@@ -18,10 +19,12 @@ class DocumentChunker:
         document_id: str,
         filename: str,
         mime_type: str,
-        student_id: str,
-        subject: str | None,
-        grade_level: str | None,
         blocks: list[ExtractedBlock],
+        source: str = "student",
+        student_id: str | None = None,
+        relative_path: str | None = None,
+        subject: str | None = None,
+        grade_level: str | None = None,
     ) -> list[DocumentChunk]:
         chunks: list[DocumentChunk] = []
         chunk_index = 0
@@ -40,9 +43,11 @@ class DocumentChunker:
                     DocumentChunk(
                         id=str(uuid.uuid5(uuid.NAMESPACE_URL, f"{document_id}:{chunk_index}")),
                         text=cleaned,
+                        source=source,
                         student_id=student_id,
                         document_id=document_id,
                         filename=filename,
+                        relative_path=relative_path,
                         mime_type=mime_type,
                         page_number=block.page_number,
                         chunk_index=chunk_index,

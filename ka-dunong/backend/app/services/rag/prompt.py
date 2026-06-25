@@ -105,7 +105,7 @@ def build_user_prompt(request: ChatRequest, sources: list[Source]) -> str:
 - Subject: {request.subject}
 - Weak topics: {weak_topics}
 
-Retrieved context from uploaded learning materials:
+Retrieved context from official DepEd resources and uploaded learning materials:
 {context}
 
 Recent conversation:
@@ -114,18 +114,22 @@ Recent conversation:
 Student question:
 {request.question}
 
-Use the retrieved context when it helps answer the student's question. If the context is not relevant or no context is available, tutor from your curriculum knowledge while staying honest about what came from the uploaded material."""
+Use the retrieved context when it helps answer the student's question. Prefer official DepEd context when it is relevant. If the context is not relevant or no context is available, tutor from your curriculum knowledge while staying honest about what came from retrieved materials."""
 
 
 def _format_context(sources: list[Source]) -> str:
     if not sources:
-        return "No uploaded-material context was retrieved for this question."
+        return "No DepEd or uploaded-material context was retrieved for this question."
 
     formatted: list[str] = []
     for index, source in enumerate(sources, start=1):
         page = f", page {source.page_number}" if source.page_number else ""
+        origin = "Official DepEd" if source.source == "deped" else "Student upload"
+        path = f", {source.relative_path}" if source.relative_path else ""
+        labels = [label for label in [source.grade_level, source.subject] if label]
+        subject = f", {' '.join(labels)}" if labels else ""
         formatted.append(
-            f"[Source {index}: {source.filename}{page}, chunk {source.chunk_index}]\n"
+            f"[Source {index}: {origin}, {source.filename}{path}{page}{subject}, chunk {source.chunk_index}]\n"
             f"{source.text}"
         )
     return "\n\n".join(formatted)

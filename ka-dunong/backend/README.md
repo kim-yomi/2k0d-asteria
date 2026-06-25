@@ -25,3 +25,13 @@ TESSERACT_CMD=
 ```
 
 Uploaded files and Qdrant data are stored under `backend/.data/` for the MVP.
+
+## Index DepEd Resources
+
+Place official DepEd PDF or DOCX files under `backend/knowledge/deped/` using any nested grade/subject folders, then run:
+
+```bash
+python backend/scripts/index_deped.py
+```
+
+The script recursively indexes every PDF and DOCX into the same embedded Qdrant collection used by student uploads. Chat retrieval searches both the built-in DepEd knowledge base and the current student's uploaded materials.

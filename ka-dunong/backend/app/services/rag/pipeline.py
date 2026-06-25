@@ -49,6 +49,7 @@ class RagPipeline:
             document_id=document_id,
             filename=filename,
             mime_type=extraction.mime_type,
+            source="student",
             student_id=student_id,
             subject=subject,
             grade_level=grade_level,

@@ -22,9 +22,11 @@ class ExtractionResult:
 class DocumentChunk:
     id: str
     text: str
-    student_id: str
+    source: str
+    student_id: str | None
     document_id: str
     filename: str
+    relative_path: str | None
     mime_type: str
     page_number: int | None
     chunk_index: int
