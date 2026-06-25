@@ -260,8 +260,49 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-            )}
-            <div ref={bottomRef} />
+
+              {/* Input area */}
+              <div className="mt-4 flex items-center gap-2 bg-white/5 rounded-xl px-3 py-2.5 border border-white/10">
+                <span className="text-white/25 text-sm flex-1">Mag-type ng tanong...</span>
+                <div className="w-6 h-6 rounded-md bg-[#c97e82] flex items-center justify-center flex-shrink-0">
+                  <ChevronRight size={12} className="text-white" />
+                </div>
+              </div>
+            </div>
+
+            {/* Bird — bottom-left of chat */}
+            <div className="absolute bottom-10 left-[-20%] flex items-end gap-0 z-20 group cursor-default">
+              <Image
+                src="/bird-happy.png"
+                alt="Dunong, the Ka-Dunong mascot"
+                width={310}
+                height={310}
+                className="object-contain drop-shadow-md transition-transform duration-300 ease-out group-hover:-translate-y-5"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Features ── */}
+      <section id="features" className="bg-[#fdf5f5] py-20">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col items-center mb-14">
+            <div className="flex items-center gap-4 justify-center mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#3d3535] text-center">
+                Designed para matuto ka talaga.
+              </h2>
+              <Image
+                src="/bird-curious.png"
+                alt="Curious Dunong"
+                width={72}
+                height={72}
+                className="object-contain flex-shrink-0 hover:-translate-y-3 transition-transform duration-300 ease-out"
+              />
+            </div>
+            <p className="text-[#3d3535]/60 text-lg max-w-xl text-center">
+              Hindi lang question-and-answer. Ka-Dunong builds real understanding — the kind that sticks when exam day comes.
+            </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
