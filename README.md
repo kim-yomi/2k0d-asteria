@@ -243,3 +243,10 @@ Ka-Dunong exists to make high-quality, personalized education more accessible fo
 
 > **Understand more. Memorize less. Learn with Ka-Dunong.**
 
+---
+
+# 🔨 What have we developed?
+
+
+
+> **Understand more. Memorize less. Learn with Ka-Dunong.**
