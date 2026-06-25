@@ -1,129 +1,259 @@
-# 2k0d-asteria
+# 🎓 Ka-Dunong AI
 
-2K0D Team Members:
-- Chorong Kim
-- Aloysious Charles Orbegoso
-- Denise Ruth Manalang
-- Lance Albert Aguila
+### An AI Study Companion Built for Filipino Learners
 
-### Submission for Project Case 2: AI-Powered Study Companion for Filipino Learners
-
----
-
-## Summary
-**Ka-Dunong AI** is an open source AI study companion built for Filipino K-12 students. It helps you understand your subjects deeply, not by giving you the answers, but by guiding you to figure them out yourself, the way a patient and knowledgeable kuya or ate would.
-
-It knows the DepEd K-12 curriculum. It talks the way you talk. And it is always there,  whether you are reviewing for a long test at 11pm, trying to understand a concept your teacher explained too fast, or just curious about something from class.
+> Built by **Team 2K0D**
+>
+> - Chorong Kim
+> - Aloysious Charles Orbegoso
+> - Denise Ruth Manalang
+> - Lance Albert Aguila
 
 ---
 
-## Who is it for?
-Ka-Dunong is built for Filipino students from Grade 1 to Grade 12 — studying any subject in the DepEd curriculum, at their own pace, on their own time.
-It is especially useful for students who:
-- Do not have access to a private tutor
-- Learn better by asking questions than by re-reading their notes
-- Study at home without someone to ask when they get stuck
-- Want to review for exams like the NAT, college entrance tests, or IELTS
-- Prefer to think and talk in Taglish, the way most Filipino students actually do
+# 📖 The Problem
+
+Millions of Filipino students learn in environments where personalized academic support is difficult to access.
+
+Large class sizes, limited access to tutors, language barriers, and inconsistent internet connectivity make it difficult for learners to receive the one-on-one guidance they need. Many students struggle with foundational concepts that affect future learning, while existing AI assistants often provide direct answers instead of helping students understand *why* those answers are correct.
+
+Most educational platforms are designed for a global audience—not specifically for the way Filipino students learn.
 
 ---
 
-## Language
+# 💡 Our Solution
 
-Ka-Dunong is bilingual by design — not just translated. Filipino and English are both fully supported across every subject, and the AI can explain, question, and tutor you in either language or both at the same time.
+**Ka-Dunong AI** is an open-source AI study companion built specifically for Filipino K–12 learners.
 
-Three language modes:
+Rather than completing homework for students, Ka-Dunong acts like a patient tutor—guiding learners through questions, adapting explanations to their grade level, and encouraging deeper understanding through conversation.
 
-| Mode | What it sounds like |
-| :--- | :--- |
-| **Taglish (default)** | "So ang nangyari dito sa Battle of Mactan — what do you think ang naging dahilan kung bakit natalo si Magellan?" |
-| **Full Filipino** | "Bakit mo sa tingin ay natalo si Magellan sa Labanan ng Mactan? Ano ang mga salik na nag-ambag dito?" |
-| **Full English** | "Why do you think Magellan was defeated at the Battle of Mactan? What factors contributed to that outcome?" |
+Built around the **DepEd K–12 curriculum**, Ka-Dunong communicates naturally in **Taglish, Filipino, or English**, learns from the student's own learning materials, and is designed to work even in low-bandwidth environments.
 
+> **Our goal is simple: Help students understand—not just answer.**
 
 ---
 
-## Curriculum
-Ka-Dunong is grounded in the DepEd K-12 curriculum. It knows the learning competencies and subject matter across all learning areas:
-- **Languages** — Filipino, English
-- **Mathematics** — from basic arithmetic to Statistics and Probability
-- **Science** — Earth Science, Biology, Chemistry, Physics
-- **Social Studies** — Araling Panlipunan (Kasaysayan, Ekonomiks, and more)
-- **Values Education** — Edukasyon sa Pagpapakatao (ESP)
-- **MAPEH** — Music, Arts, Physical Education, Health
-- **TLE / TVL** — Technology and Livelihood Education and Technical-Vocational tracks
-- **Senior High Core and Applied subjects** — across Academic, TVL, Sports, and Arts & Design tracks
-When you upload your own materials — a module, a handout, a chapter from your textbook — the AI tutors you on that specific content, aligned to what you are actually studying in school.
+# ✨ Why Ka-Dunong?
+
+Unlike general-purpose AI assistants, Ka-Dunong is designed around the realities of Philippine education.
+
+- ✅ Curriculum-aligned with DepEd K–12 competencies
+- ✅ Supports natural Taglish conversations
+- ✅ Uses Socratic tutoring instead of answer dumping
+- ✅ Learns from student-uploaded modules and handouts
+- ✅ Adapts explanations to the learner's grade level
+- ✅ Tracks learning progress and competency mastery
+- ✅ Designed for offline-first learning
+- ✅ Open source and privacy-first
 
 ---
 
-## Core features
-**Socratic tutoring**. The AI does not just hand you the answer. It asks you questions, gives hints, and helps you reason through problems yourself. This is how real understanding is built — and how you will remember it when exam day comes.
+# 🚀 Core Features
 
-**Learns from your materials**. Upload a DepEd module, a printed handout, your own notes, or any PDF. Ka-Dunong reads it and uses it as the basis for your tutoring session — so the explanations and questions are always about what you are actually studying, not a generic version of the topic.
+## 🧠 Socratic AI Tutor
 
-**Practice on demand**. Ask for a quiz, flashcard set, or worked example at any time. Practice is generated from your actual materials and tailored to your current level — not pulled from a generic question bank.
+Instead of immediately giving answers, Ka-Dunong guides students through problems using questions, hints, and step-by-step reasoning.
 
-**Adapts to your level**. Ka-Dunong explains things simply when you are just starting out, and goes deeper as your understanding grows. It notices when you are confused and tries a different angle — a simpler analogy, a different example, a slower walkthrough.
-
-**Tracks your progress**. The app keeps track of what you have covered, where you keep getting stuck, and what to revisit before a test. You can see your own learning clearly and know exactly where to focus next.
-
-**Works offline**. A stable internet connection is not always available. Ka-Dunong is designed to work fully offline — the AI model, your uploaded materials, and your progress data all live on your device. You can study anywhere: on the bus, in a barangay with spotty signal, or anywhere else.
-
-**Open source and private**. Ka-Dunong is fully open source. Your study sessions, uploaded materials, and progress data are stored on your own device and never shared. No subscription, no ads, no data sold.
+The objective is to develop understanding—not dependency.
 
 ---
 
-## Design principles
-1. Built for Filipino students, not adapted for them. The curriculum, the language, and the way the AI talks are all designed around the actual experience of studying in the Philippines — not translated from a foreign product.
- Understanding over answers. Every feature is designed to help you actually learn the material, not just get through an assignment.
-3. Taglish is not a bug. Most Filipino students think in Taglish. The app embraces this as the natural default, while giving you the option to practice in pure Filipino or pure English when you need to.
-4. Works where students are. Offline-first, low storage footprint, runs on mid-range Android devices — because that is the reality for most Filipino students.
-5. Your data is yours. No school admin, no parent dashboard, no third-party data sharing. Just you and your study sessions.
+## 📚 Curriculum-Aware Learning
+
+Ka-Dunong is grounded in the DepEd K–12 curriculum across Grade 1–12.
+
+Supported learning areas include:
+
+- Filipino
+- English
+- Mathematics
+- Science
+- Araling Panlipunan
+- Edukasyon sa Pagpapakatao (ESP)
+- MAPEH
+- TLE / TVL
+- Senior High School Core & Applied Subjects
+
+Students can also upload their own modules, handouts, and textbooks so tutoring stays aligned with what they're currently studying in school.
 
 ---
 
-# What it is not
-- It is not a homework-completion tool. It will not write your essay or solve your problem set for you. It will help you understand how to do those things yourself.
-- It is not a replacement for your teacher. It is what you use when your teacher is not available — at night, on weekends, or whenever you need to go deeper on something.
-- It is not a course platform. There are no video lessons or structured programs. You bring what you are studying; it helps you understand it.
-- It is not a social app. No feeds, no rankings, no notifications. Just you and what you need to learn.
+## 🌏 Built for Filipino Learners
+
+Language is more than translation.
+
+Ka-Dunong naturally supports three tutoring modes.
+
+| Mode | Example |
+|------|---------|
+| **Taglish (Default)** | *"So bakit kaya natalo si Magellan? Ano sa tingin mo ang naging dahilan?"* |
+| **Filipino** | *"Ano ang mga salik na nagdulot ng pagkatalo ni Magellan?"* |
+| **English** | *"Why do you think Magellan was defeated during the Battle of Mactan?"* |
+
+Students can freely switch languages during a conversation without interrupting the lesson.
 
 ---
 
-## Tech Stack & Architecture
+## ✍️ Practice on Demand
 
-### Language & NLP Layer
-* **fasttext:** Lightweight language detection pre-filter to instantly route Filipino, English, and Taglish inputs.
-* **RoBERTa-tl-cased (Hugging Face):** Local pipeline with fine-tuned heads for language classification, curriculum NER, and confusion/sentiment detection.
-* **spaCy:** Custom Filipino pipeline handling strict tokenization and basic POS tagging.
+From any lesson, students can instantly generate:
 
-### Generative AI & Offline Engine
-* **Ollama:** Handles fully on-device LLM management, model pulling, and offline serving.
-* **Adaptive Model Tiers:** Dynamically utilizes Phi-3 Mini 3.8B (Q4) for low-end Androids, Llama 3.1 8B for mid-range, and Llama 3.1 70B / Mistral 7B for desktops.
-* **WorkManager / BackgroundTasks:** Native Android and iOS tools for syncing progress once the user reconnects to the internet.
+- Practice quizzes
+- Flashcards
+- Worked examples
+- Review questions
 
-### RAG (Curriculum Knowledge Base) Pipeline
-* **LlamaIndex:** Orchestrates the full retrieval and chunking pipeline.
-* **Qdrant (Embedded Mode):** Serverless, on-device vector store for DepEd modules and curriculum guides.
-* **RoBERTa-tl-cased Embeddings:** Hyper-local embeddings ensuring Taglish text retrieves correctly.
-* **pypdf & python-docx:** Document parsers for uploaded student materials.
-* **pytesseract:** Optical Character Recognition (OCR) for scanned modules and printed handouts.
-
-### Logic, Tracking, & Practice Generation
-* **SQLite (On-device):** Stores sessions, quiz scores, and competency coverage mapped to DepEd MELCs.
-* **pandas:** Conducts local data frame gap analysis to schedule smart study revisits.
-* **Pydantic:** Strictly enforces JSON validation schemas for generated quizzes and progress extraction.
-* **Anki-compatible Export:** Allows generated flashcards to be natively exported to Anki.
-
-### App Shells & Infrastructure
-* **React Native + Expo:** Single codebase for Android and iOS mobile deployment.
-* **Next.js + Tauri:** Web shell wrapped as a lightweight desktop app tailored for low-spec laptops.
-* **FastAPI + PostgreSQL:** Optional, self-hosted thin backend bridge for cross-device syncing.
-* **uv & Docker Compose:** Ultra-fast Python package management and local dev environment setup.
-* **Pytest:** Automated testing for the NLP pipeline and RAG retrieval accuracy.
+All generated from either the DepEd curriculum or the student's uploaded learning materials.
 
 ---
 
-## AI Prototyping Disclosure
-This MVP uses the **Claude API** to simulate the AI tutor. For production, we will transition to **Ollama** to run a fully local, offline-first engine, allowing the app to work entirely without internet in low-bandwidth areas.
+## 📈 Personalized Learning
+
+Ka-Dunong builds a personalized learner profile as students study.
+
+It keeps track of:
+
+- Completed topics
+- Competency coverage
+- Practice history
+- Areas requiring review
+- Learning preferences
+
+Future tutoring sessions become increasingly personalized based on the student's progress.
+
+---
+
+## 📶 Offline-First
+
+Learning shouldn't stop because internet access does.
+
+Our production architecture is designed around an offline-first approach where:
+
+- AI models run locally
+- Learning materials stay on-device
+- Progress is stored locally
+- Synchronization happens only when connectivity is available
+
+---
+
+# 🎯 Design Principles
+
+## 🇵🇭 Built for Filipino Students
+
+Every aspect—from curriculum alignment to language—is designed around Philippine classrooms rather than adapted from foreign learning platforms.
+
+## 💡 Understanding Over Answers
+
+Ka-Dunong is designed to help students genuinely understand concepts instead of simply completing assignments.
+
+## 💬 Taglish Is Not a Bug
+
+Many Filipino learners naturally think and communicate in Taglish.
+
+Ka-Dunong embraces this while allowing students to practice in pure Filipino or English whenever they choose.
+
+## 🌐 Works Where Students Are
+
+Designed for mid-range Android devices, limited connectivity, and low-bandwidth environments.
+
+## 🔒 Privacy First
+
+Student learning data belongs to the student.
+
+No advertising.
+
+No third-party data sharing.
+
+No unnecessary data collection.
+
+---
+
+# ❌ What Ka-Dunong Is Not
+
+Ka-Dunong is **not**:
+
+- A homework-answer generator
+- A replacement for teachers
+- A video course platform
+- A social learning network
+
+It is a study companion that helps students learn independently whenever they need additional guidance.
+
+---
+
+# 🏗️ System Architecture
+
+Ka-Dunong is built around five major components:
+
+1. **Adaptive Language Layer**
+   - Detects Filipino, English, and Taglish
+   - Supports seamless code-switching
+
+2. **Curriculum Knowledge Base**
+   - Retrieves DepEd competencies
+   - Uses uploaded learning materials through Retrieval-Augmented Generation (RAG)
+
+3. **AI Tutoring Engine**
+   - Socratic tutoring
+   - Guided reasoning
+   - Adaptive explanations
+   - Practice generation
+
+4. **Learner Model**
+   - Tracks competency mastery
+   - Identifies learning gaps
+   - Personalizes future tutoring sessions
+
+5. **Offline Runtime**
+   - Stores materials locally
+   - Runs AI offline (production)
+   - Synchronizes when internet becomes available
+
+---
+
+# ⚙️ Technology Stack
+
+| Layer | Technologies |
+|--------|--------------|
+| Mobile | React Native + Expo |
+| Desktop | Next.js + Tauri |
+| Backend | FastAPI |
+| AI | Claude API (MVP), Ollama (Production) |
+| Retrieval | LlamaIndex + Qdrant |
+| OCR | Tesseract OCR |
+| Database | SQLite, PostgreSQL (optional sync) |
+| Document Parsing | pypdf, python-docx |
+| Testing | Pytest |
+
+---
+
+# 🚧 MVP Disclosure
+
+This hackathon prototype uses the **Claude API** to simulate the tutoring experience.
+
+Our production roadmap transitions to **Ollama** to enable fully local AI inference, allowing Ka-Dunong to operate entirely offline in low-bandwidth environments.
+
+---
+
+# 🔮 Roadmap
+
+Future versions of Ka-Dunong will include:
+
+- 📱 Fully offline AI tutoring
+- 🎤 Voice-based tutoring in Filipino and English
+- 📷 Camera-based worksheet solving
+- 🧩 Adaptive mastery learning
+- 📝 Automatic reviewer generation
+- 🎓 NAT and college entrance exam preparation
+- 🤝 Community-contributed curriculum improvements
+
+---
+
+# ❤️ Vision
+
+We believe every Filipino learner deserves access to a patient tutor—regardless of where they live, what language they speak, or whether they can afford private tutoring.
+
+Ka-Dunong exists to make high-quality, personalized education more accessible for every student in the Philippines.
+
+> **Understand more. Memorize less. Learn with Ka-Dunong.**
+
