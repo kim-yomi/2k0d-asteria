@@ -1,8 +1,9 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { Send, BookOpen, BarChart2, ChevronDown, ArrowLeft, Upload, Layers } from "lucide-react";
+import PracticeTab from "@/components/PracticeTab";
 import Image from "next/image";
-import { Send, BookOpen, BarChart2, ChevronDown, ArrowLeft, Upload } from "lucide-react";
 import {
   loadProgress,
   saveProgress,
@@ -85,7 +86,7 @@ export default function KaDunong() {
   const [subject, setSubject] = useState("Science");
   const [grade, setGrade] = useState("Grade 8");
   const [languageMode, setLanguageMode] = useState<LanguageMode>("taglish");
-  const [view, setView] = useState<"chat" | "progress">("chat");
+  const [view, setView] = useState<"chat" | "progress" | "practice">("chat");
   const [progress, setProgress] = useState<KaDunongProgress | null>(null);
   const [sessionId] = useState(generateSessionId);
   const [studentId] = useState(getOrCreateStudentId);
@@ -271,6 +272,12 @@ export default function KaDunong() {
             <BookOpen size={18} />
           </button>
           <button
+            onClick={() => setView("practice")}
+            className={`p-2 rounded-lg transition-colors ${view === "practice" ? "bg-[#c97e82]/20 text-[#e8b5b7]" : "text-white/40 hover:text-white"}`}
+          >
+            <Layers size={18} />
+          </button>
+          <button
             onClick={() => setView("progress")}
             className={`p-2 rounded-lg transition-colors ${view === "progress" ? "bg-[#c97e82]/20 text-[#e8b5b7]" : "text-white/40 hover:text-white"}`}
           >
@@ -451,7 +458,12 @@ export default function KaDunong() {
             </p>
           </div>
         </>
-      ) : (
+        ) : view === "practice" ? (
+          /* Practice View */
+          <div className="flex-1 overflow-hidden">
+            <PracticeTab grade={grade} subject={subject} languageMode={languageMode} />
+          </div>
+        ) : (
         /* Progress View */
         <div className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
           <div>
