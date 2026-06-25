@@ -248,8 +248,11 @@ Ka-Dunong exists to make high-quality, personalized education more accessible fo
 # 🔨 What have we developed?
 
 • Working application prototype 
+
 • Working Ka-Dunong bot
+
 • Working progress bar
+
 • Working PDF submission functionality
 
 ---
@@ -257,8 +260,11 @@ Ka-Dunong exists to make high-quality, personalized education more accessible fo
 # 🔄 What are we still developing?
 
 • NLP (RoBERTa-tl-cased pipeline)
+
 • Practice material generator (practice tests, flashcards)
+
 • User-level adaptation
+
 • Planner/Schedules feature
 • Note taker feature
 • Smart Module Scanner feature
