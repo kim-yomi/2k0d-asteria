@@ -1,3 +1,4 @@
+import logging
 import re
 from pathlib import Path
 
@@ -6,6 +7,14 @@ from pypdf import PdfReader
 
 from app.config import Settings
 from app.services.rag.types import ExtractedBlock, ExtractionResult
+
+logger = logging.getLogger("ka_dunong.rag.extractors")
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    handler.setFormatter(logging.Formatter("%(message)s"))
+    logger.addHandler(handler)
+logger.setLevel(logging.INFO)
+logger.propagate = False
 
 
 class DocumentExtractor:
@@ -28,15 +37,29 @@ class DocumentExtractor:
 
         for index, page in enumerate(reader.pages, start=1):
             text = page.extract_text() or ""
+            extracted_length = len(text.strip())
             used_for_page = False
+            logger.info("Page %s: pypdf extracted %s characters", index, extracted_length)
 
             if self._should_ocr(text):
+                logger.info("Page %s: Running OCR...", index)
                 ocr_text, unavailable = self._ocr_pdf_page(file_path, index - 1)
                 ocr_unavailable = ocr_unavailable or unavailable
-                if ocr_text.strip():
+                ocr_length = len(ocr_text.strip())
+                logger.info("Page %s: OCR extracted %s characters", index, ocr_length)
+                if ocr_length > 0:
                     text = ocr_text
                     used_for_page = True
                     ocr_used = True
+                    logger.info("Page %s: Using OCR result", index)
+                else:
+                    logger.warning(
+                        "Page %s: OCR returned no text; using pypdf result", index
+                    )
+            elif self.settings.rag_enable_ocr:
+                logger.info("Page %s: Skipping OCR", index)
+            else:
+                logger.info("Page %s: Skipping OCR because RAG_ENABLE_OCR is false", index)
 
             blocks.append(
                 ExtractedBlock(
@@ -94,7 +117,13 @@ class DocumentExtractor:
             page = pdf[page_index]
             image = page.render(scale=2).to_pil()
             return pytesseract.image_to_string(image), False
-        except Exception:
+        except Exception as error:
+            logger.warning(
+                "OCR unavailable for %s page %s: %s",
+                file_path.name,
+                page_index + 1,
+                error,
+            )
             return "", True
 
     def _clean_text(self, text: str) -> str:
