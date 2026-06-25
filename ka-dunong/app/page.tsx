@@ -7,22 +7,6 @@ import {
   Shield, ChevronRight, Menu, X, CheckCircle, Globe,
 } from "lucide-react";
 
-function KaDunongBookIcon({ size = 24, color = "currentColor" }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 79.511719 69.09375" fill="none">
-      <path
-        fillRule="evenodd"
-        d="M 39.757812 69.09375 C 39.191406 69.09375 38.65625 68.835938 38.300781 68.394531 C 34.097656 63.136719 27.101562 58.269531 4.570312 58.269531 C 1.964844 58.269531 0 56.164062 0 53.371094 L 0 4.980469 C 0 2.457031 2.046875 0.410156 4.558594 0.410156 C 23.90625 0.496094 35.050781 4.519531 39.757812 13.320312 C 44.460938 4.519531 55.601562 0.496094 74.933594 0.410156 C 77.464844 0.410156 79.511719 2.457031 79.511719 4.96875 L 79.511719 53.699219 C 79.511719 56.21875 77.460938 58.269531 74.941406 58.269531 C 52.414062 58.269531 45.417969 63.132812 41.210938 68.394531 C 40.859375 68.835938 40.324219 69.09375 39.757812 69.09375 Z M 4.5625 4.136719 C 4.101562 4.136719 3.726562 4.511719 3.726562 4.96875 L 3.726562 53.371094 C 3.726562 53.644531 3.789062 54.542969 4.570312 54.542969 C 22.671875 54.542969 33.117188 57.425781 39.757812 64.398438 C 46.398438 57.425781 56.84375 54.542969 74.941406 54.542969 C 75.40625 54.542969 75.785156 54.164062 75.785156 53.699219 L 75.785156 4.980469 C 75.785156 4.507812 75.410156 4.136719 74.953125 4.136719 C 54.4375 4.226562 44.136719 8.804688 41.5625 18.96875 C 41.351562 19.796875 40.609375 20.375 39.757812 20.375 C 38.902344 20.375 38.160156 19.796875 37.949219 18.96875 C 35.375 8.804688 25.078125 4.226562 4.5625 4.136719 Z"
-        fill={color}
-      />
-      <path
-        fillRule="evenodd"
-        d="M 39.757812 69.09375 C 38.726562 69.09375 37.894531 68.261719 37.894531 67.230469 L 37.894531 30.425781 C 37.894531 29.394531 38.726562 28.5625 39.757812 28.5625 C 40.785156 28.5625 41.621094 29.394531 41.621094 30.425781 L 41.621094 67.230469 C 41.621094 68.261719 40.785156 69.09375 39.757812 69.09375 Z"
-        fill={color}
-      />
-    </svg>
-  );
-}
 
 const FEATURES = [
   {
@@ -215,9 +199,7 @@ export default function HomePage() {
             <div className="bg-[#1a1212] rounded-2xl p-4 shadow-2xl w-full max-w-[390px] border border-[#c97e82]/20">
               {/* Chat header */}
               <div className="flex items-center gap-2.5 pb-3 border-b border-white/10 mb-4">
-                <div className="w-7 h-7 rounded-lg bg-[#c97e82] flex items-center justify-center flex-shrink-0">
-                  <KaDunongBookIcon size={14} color="white" />
-                </div>
+                <Image src="/bird-app.png" alt="Ka-Dunong" width={28} height={28} className="object-contain flex-shrink-0" />
                 <div>
                   <p className="text-white text-sm font-semibold leading-none">
                     Ka-Dunong<span className="text-[#e8b5b7]">.ai</span>
@@ -235,9 +217,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="flex gap-2 items-start">
-                  <div className="w-6 h-6 rounded-md bg-[#c97e82] flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <KaDunongBookIcon size={10} color="white" />
-                  </div>
+                  <Image src="/bird-app.png" alt="Ka-Dunong" width={24} height={24} className="object-contain flex-shrink-0 mt-0.5" />
                   <div className="bg-white/[0.06] border border-white/10 text-white rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[85%] leading-relaxed">
                     Okay, gravity! Bago tayo mag-dive in — kung tatanggalin mo raw ang lupa sa ilalim mo ngayon, anong mangyayari sa iyo?
                   </div>
@@ -250,9 +230,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="flex gap-2 items-start">
-                  <div className="w-6 h-6 rounded-md bg-[#c97e82] flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <KaDunongBookIcon size={10} color="white" />
-                  </div>
+                  <Image src="/bird-app.png" alt="Ka-Dunong" width={24} height={24} className="object-contain flex-shrink-0 mt-0.5" />
                   <div className="bg-white/[0.06] border border-white/10 text-white rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[85%] leading-relaxed">
                     Tama! Pababa, di ba? So —{" "}
                     <span className="text-[#e8b5b7] font-medium">bakit pababa</span>{" "}
