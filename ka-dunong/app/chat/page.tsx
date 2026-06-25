@@ -1,8 +1,19 @@
 "use client";
+import ProgressDashboard from "@/components/ProgressDashboard";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import {
+  Send,
+  BookOpen,
+  BarChart2,
+  ChevronDown,
+  ArrowLeft,
+  Upload,
+  Layers,
+} from "lucide-react";
+import PracticeTab from "@/components/PracticeTab";
 import Image from "next/image";
-import { Send, BookOpen, BarChart2, CalendarDays, ChevronDown, ArrowLeft, Upload } from "lucide-react";
+
 import {
   loadProgress,
   saveProgress,
@@ -27,7 +38,6 @@ interface Source {
   score: number;
   text: string;
 }
-
 interface MaterialUploadResponse {
   document_id?: string;
   filename?: string;
@@ -85,7 +95,7 @@ export default function KaDunong() {
   const [subject, setSubject] = useState("Science");
   const [grade, setGrade] = useState("Grade 8");
   const [languageMode, setLanguageMode] = useState<LanguageMode>("taglish");
-  const [view, setView] = useState<"chat" | "progress">("chat");
+  const [view, setView] = useState<"chat" | "progress" | "practice">("chat");
   const [progress, setProgress] = useState<KaDunongProgress | null>(null);
   const [sessionId] = useState(generateSessionId);
   const [studentId] = useState(getOrCreateStudentId);
@@ -278,6 +288,12 @@ export default function KaDunong() {
             <BookOpen size={18} />
           </button>
           <button
+            onClick={() => setView("practice")}
+            className={`p-2 rounded-lg transition-colors ${view === "practice" ? "bg-[#c97e82]/20 text-[#e8b5b7]" : "text-white/40 hover:text-white"}`}
+          >
+            <Layers size={18} />
+          </button>
+          <button
             onClick={() => setView("progress")}
             className={`p-2 rounded-lg transition-colors ${view === "progress" ? "bg-[#c97e82]/20 text-[#e8b5b7]" : "text-white/40 hover:text-white"}`}
           >
@@ -458,109 +474,19 @@ export default function KaDunong() {
             </p>
           </div>
         </>
+         ) : view === "practice" ? (
+        <div className="flex-1 overflow-hidden">
+          <PracticeTab grade={grade} subject={subject} languageMode={languageMode} />
+        </div>
       ) : (
         /* Progress View */
-        <div className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
-          <div>
-            <h2 className="text-lg font-bold mb-1">Iyong Progreso</h2>
-            <p className="text-white/40 text-sm">{subject} · {grade}</p>
+        progress ? (
+          <ProgressDashboard progress={progress} subject={subject} grade={grade} />
+        ) : (
+          <div className="flex-1 flex items-center justify-center text-white/30 text-sm">
+            Loading...
           </div>
-
-          {/* Quiz score card */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-            <p className="text-xs text-white/40 uppercase tracking-wider mb-3">Quiz Performance</p>
-            <div className="flex items-end gap-2">
-              <span className="text-4xl font-bold text-[#e8b5b7]">{score?.percent ?? 0}%</span>
-              <span className="text-white/40 text-sm mb-1">{score?.correct ?? 0} / {score?.total ?? 0} tama</span>
-            </div>
-            {score && score.total > 0 && (
-              <div className="mt-3 h-2 bg-white/10 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#c97e82] rounded-full transition-all"
-                  style={{ width: `${score.percent}%` }}
-                />
-              </div>
-            )}
-            {score?.total === 0 && (
-              <p className="text-white/30 text-sm mt-2">Wala pang quiz. Mag-aral muna tayo.</p>
-            )}
-          </div>
-
-          {/* Weak areas */}
-          {weakAreas.length > 0 && (
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-              <p className="text-xs text-white/40 uppercase tracking-wider mb-3">Para Pag-aralan Ulit</p>
-              <div className="space-y-2">
-                {weakAreas.map((w, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-red-400 mt-1.5 flex-shrink-0" />
-                    <div>
-                      <p className="text-sm font-medium">{w.topic}</p>
-                      {w.melcLabel && <p className="text-xs text-white/40">{w.melcLabel}</p>}
-                      <p className="text-xs text-white/30">{w.missedCount}x na na-flag</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Competencies */}
-          {competencies.length > 0 && (
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-              <p className="text-xs text-white/40 uppercase tracking-wider mb-3">DepEd Competencies (MELCs)</p>
-              <div className="space-y-3">
-                {competencies.map((c) => (
-                  <div key={c.melc}>
-                    <div className="flex items-center justify-between mb-1">
-                      <p className="text-sm font-medium">{c.label || c.melc}</p>
-                      <span className={`text-xs px-2 py-0.5 rounded-full ${
-                        c.status === "mastered"
-                          ? "bg-green-400/20 text-green-400"
-                          : c.status === "practicing"
-                          ? "bg-[#c97e82]/20 text-[#e8b5b7]"
-                          : "bg-red-400/20 text-red-400"
-                      }`}>
-                        {c.status === "mastered" ? "Naintindihan" : c.status === "practicing" ? "Pinag-aaralan" : "Kailangan ng tulong"}
-                      </span>
-                    </div>
-                    <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                      <div
-                        className={`h-full rounded-full transition-all ${
-                          c.status === "mastered" ? "bg-green-400" : c.status === "practicing" ? "bg-[#c97e82]" : "bg-red-400"
-                        }`}
-                        style={{ width: `${Math.round(c.lastScore * 100)}%` }}
-                      />
-                    </div>
-                    <p className="text-xs text-white/30 mt-1">{c.melc} · {c.attempts} attempt{c.attempts !== 1 ? "s" : ""}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Recent session topics */}
-          {recentSession && recentSession.topics.length > 0 && (
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-              <p className="text-xs text-white/40 uppercase tracking-wider mb-3">Mga Natutunan Ngayon</p>
-              <div className="flex flex-wrap gap-2">
-                {recentSession.topics.map((topic, i) => (
-                  <span key={i} className="px-3 py-1.5 bg-[#c97e82]/10 text-[#e8b5b7] rounded-full text-sm">
-                    {topic}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Empty state */}
-          {competencies.length === 0 && weakAreas.length === 0 && (!recentSession || recentSession.topics.length === 0) && (
-            <div className="text-center py-16 text-white/30">
-              <BarChart2 size={32} className="mx-auto mb-3 opacity-30" />
-              <p className="text-sm">Wala pang data. Magsimula ka nang mag-aral para makita ang iyong progreso.</p>
-            </div>
-          )}
-        </div>
+        )
       )}
     </div>
   );
