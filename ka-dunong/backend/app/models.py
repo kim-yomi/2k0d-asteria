@@ -1,6 +1,22 @@
 from pydantic import BaseModel, Field
+from pydantic import BaseModel
+from typing import Literal
 
+class PracticeRequest(BaseModel):
+    type: Literal["flashcards", "quiz"]
+    topic: str
+    subject: str = "General"
+    grade: str = "Grade 8"
+    language: str = "Taglish"
+    item_count: int = 10
+    context: str = ""    
 
+class EvaluateRequest(BaseModel):
+    question: str
+    correct_answer: str
+    explanation: str
+    student_answer: str
+    
 class OcrDetails(BaseModel):
     enabled: bool
     used: bool
