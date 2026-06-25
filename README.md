@@ -227,25 +227,11 @@ Ka-Dunong is built around five major components:
 
 ---
 
-# 🚧 MVP Disclosure
+# 🚧 AI Usage Disclosure
 
 This hackathon prototype uses the **Claude API** to simulate the tutoring experience.
 
 Our production roadmap transitions to **Ollama** to enable fully local AI inference, allowing Ka-Dunong to operate entirely offline in low-bandwidth environments.
-
----
-
-# 🔮 Roadmap
-
-Future versions of Ka-Dunong will include:
-
-- 📱 Fully offline AI tutoring
-- 🎤 Voice-based tutoring in Filipino and English
-- 📷 Camera-based worksheet solving
-- 🧩 Adaptive mastery learning
-- 📝 Automatic reviewer generation
-- 🎓 NAT and college entrance exam preparation
-- 🤝 Community-contributed curriculum improvements
 
 ---
 
