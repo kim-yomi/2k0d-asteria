@@ -103,26 +103,8 @@ function getErrorStatus(error: unknown) {
   return null;
 }
 
-function hasConnectionError(error: unknown) {
-  const serialized = String(error);
-
-  if (serialized.includes("Connection error")) {
-    return true;
-  }
-
-  if (typeof error === "object" && error !== null && "cause" in error) {
-    return String((error as { cause?: unknown }).cause).includes("fetch failed");
-  }
-
-  return false;
-}
-
 function getClientErrorMessage(error: unknown) {
   const status = getErrorStatus(error);
-
-  if (hasConnectionError(error)) {
-    return "Could not connect to Claude. Check your internet connection, firewall, VPN, or dev sandbox network permissions.";
-  }
 
   if (status === 401) {
     return "Claude rejected the API key. Check ANTHROPIC_API_KEY in ka-dunong/.env.local, then restart the dev server.";
