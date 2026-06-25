@@ -50,6 +50,19 @@ Unlike general-purpose AI assistants, Ka-Dunong is designed around the realities
 
 # 🚀 Core Features
 
+## 📶 Offline-First
+
+Learning shouldn't stop because internet access does.
+
+Our production architecture is designed around an offline-first approach where:
+
+- AI models run locally
+- Learning materials stay on-device
+- Progress is stored locally
+- Synchronization happens only when connectivity is available
+
+---
+
 ## 🧠 Socratic AI Tutor
 
 Instead of immediately giving answers, Ka-Dunong guides students through problems using questions, hints, and step-by-step reasoning.
@@ -60,7 +73,7 @@ The objective is to develop understanding—not dependency.
 
 ## 📚 Curriculum-Aware Learning
 
-Ka-Dunong is grounded in the DepEd K–12 curriculum across Grade 1–12.
+Ka-Dunong is grounded in the DepEd K–12 curriculum and aligned with the Most Essential Learning Competencies (MELCs), ensuring that tutoring sessions, practice activities, and progress tracking reflect the competencies students are expected to master in school.
 
 Supported learning areas include:
 
@@ -114,25 +127,12 @@ Ka-Dunong builds a personalized learner profile as students study.
 It keeps track of:
 
 - Completed topics
-- Competency coverage
+- MELC competency mastery
 - Practice history
 - Areas requiring review
 - Learning preferences
 
-Future tutoring sessions become increasingly personalized based on the student's progress.
-
----
-
-## 📶 Offline-First
-
-Learning shouldn't stop because internet access does.
-
-Our production architecture is designed around an offline-first approach where:
-
-- AI models run locally
-- Learning materials stay on-device
-- Progress is stored locally
-- Synchronization happens only when connectivity is available
+This allows Ka-Dunong to recommend what students should study next based on competencies they have not yet mastered.
 
 ---
 
@@ -185,29 +185,30 @@ It is a study companion that helps students learn independently whenever they ne
 
 Ka-Dunong is built around five major components:
 
-1. **Adaptive Language Layer**
-   - Detects Filipino, English, and Taglish
-   - Supports seamless code-switching
+### 1. Offline Runtime
+* Stores learning materials and progress locally
+* Supports fully local AI inference (production)
+* Synchronizes data when internet connectivity becomes available
 
-2. **Curriculum Knowledge Base**
-   - Retrieves DepEd competencies
-   - Uses uploaded learning materials through Retrieval-Augmented Generation (RAG)
+### 2. Adaptive Language Layer
+* Detects Filipino, English, and Taglish
+* Supports seamless code-switching
+* Adapts tutoring to the learner's preferred language
 
-3. **AI Tutoring Engine**
-   - Socratic tutoring
-   - Guided reasoning
-   - Adaptive explanations
-   - Practice generation
+### 3. AI Tutoring Engine
+* Conducts Socratic tutoring through guided questioning
+* Generates adaptive explanations and practice activities
+* Coordinates personalized tutoring using the learner profile
 
-4. **Learner Model**
-   - Tracks competency mastery
-   - Identifies learning gaps
-   - Personalizes future tutoring sessions
+### 4. Curriculum & Learning Materials
+* Retrieves relevant DepEd curriculum content
+* Aligns tutoring with MELCs
+* Uses Retrieval-Augmented Generation (RAG) over uploaded modules, PDFs, and textbooks
 
-5. **Offline Runtime**
-   - Stores materials locally
-   - Runs AI offline (production)
-   - Synchronizes when internet becomes available
+### 5. Learner Model
+* Tracks competency mastery
+* Identifies learning gaps and recurring misconceptions
+* Personalizes future tutoring sessions and study recommendations
 
 ---
 
@@ -235,6 +236,32 @@ Our production roadmap transitions to **Ollama** to enable fully local AI infere
 
 ---
 
+# 🔨 What Have We Developed?
+
+Our current MVP includes the following implemented components:
+
+* ✅ Functional application prototype
+* ✅ Ka-Dunong AI tutoring chatbot
+* ✅ Student progress tracking interface
+* ✅ PDF upload and document submission functionality
+
+---
+
+## 🔄 Currently in Development
+
+The following features are planned for subsequent iterations of the MVP:
+
+* 🚧 Filipino NLP pipeline (RoBERTa-tl-cased)
+* 🚧 AI-generated practice materials (quizzes, flashcards, and worked examples)
+* 🚧 Personalized learner adaptation
+* 🚧 Offline AI inference and synchronization
+* 🚧 Study planner and scheduling assistant
+* 🚧 AI-powered note-taking
+* 🚧 Smart Module Scanner (OCR for printed modules and handouts)
+* 🚧 Gamification features (streaks, achievements, and learning milestones)
+
+---
+
 # ❤️ Vision
 
 We believe every Filipino learner deserves access to a patient tutor—regardless of where they live, what language they speak, or whether they can afford private tutoring.
@@ -243,36 +270,3 @@ Ka-Dunong exists to make high-quality, personalized education more accessible fo
 
 > **Understand more. Memorize less. Learn with Ka-Dunong.**
 
----
-
-# 🔨 What have we developed?
-
-• Working application prototype 
-
-• Working Ka-Dunong bot
-
-• Working progress bar
-
-• Working PDF submission functionality
-
----
-
-# 🔄 What are we still developing?
-
-• NLP (RoBERTa-tl-cased pipeline)
-
-• Practice material generator (practice tests, flashcards)
-
-• User-level adaptation
-
-• Offline functionalities
-
-• Planner/Schedules feature
-
-• Note taker feature
-
-• Smart Module Scanner feature
-
-• Gamification features
-
----
