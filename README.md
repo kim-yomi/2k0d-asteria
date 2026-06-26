@@ -35,7 +35,15 @@ Unlike traditional AI chatbots, Ka-Dunong continuously builds a learner profile 
 
 ---
 
-# Why Ka-Dunong?
+# Why "Ka-Dunong"?
+
+Ka-Dunong comes from the term used to address storytellers or wise men who told of the Bikolano epic, "Ibalon." Similarly, our AI takes on the role of a narrator, not by telling students the answers to their assignments and activities, but by guiding them through a learning journey of their own. 
+
+Just as a narrator accompanies and leads the audience throughout a story, Ka-Dunong accompanies students throughout their educational journey, helping them understand each chapter rather than skipping to the direct answer or the ending.
+
+---
+
+# What does it do?
 
 Unlike general-purpose AI assistants, Ka-Dunong is designed around the realities of Philippine education.
 
@@ -62,6 +70,8 @@ Our production architecture is designed around an offline-first approach where:
 * Learning materials stay on-device
 * Progress is stored locally
 * Synchronization happens when connectivity becomes available
+
+> This feature is currently unable to be implemented due to time constraints. But configuration is made to be simply implemented, as in swapping the two different AI APIs.
 
 ---
 
@@ -191,6 +201,8 @@ Ka-Dunong is built around five major components.
 * Supports fully local AI inference (production)
 * Synchronizes data when internet connectivity becomes available
 
+> This feature is currently unable to be implemented due to time constraints. But configuration is made to be simply implemented, as in swapping the two different AI APIs.
+
 ### 2. Adaptive Language Layer
 
 * Detects Filipino, English, and Taglish
@@ -223,7 +235,7 @@ Ka-Dunong is built around five major components.
 | Layer            | Technologies                          |
 | ---------------- | ------------------------------------- |
 | Mobile           | React Native + Expo                   |
-| Desktop          | Next.js + Tauri                       |
+| Desktop          | Next.js                               |
 | Backend          | FastAPI                               |
 | AI               | Claude API (MVP), Ollama (Production) |
 | Retrieval        | LlamaIndex + Qdrant                   |
@@ -231,6 +243,7 @@ Ka-Dunong is built around five major components.
 | Database         | SQLite, PostgreSQL (optional sync)    |
 | Document Parsing | pypdf, python-docx                    |
 | Testing          | Pytest                                |
+| Deployment       | Vercel + Railway                      | 
 
 ---
 
@@ -239,6 +252,8 @@ Ka-Dunong is built around five major components.
 This hackathon prototype uses the **Claude API** to simulate the tutoring experience.
 
 Our production roadmap transitions to **Ollama** to enable fully local AI inference, allowing Ka-Dunong to operate entirely offline in low-bandwidth environments.
+
+AI tools such as **ChatGPT** and **Gemini** were used to assist in the implementation of the hackathon prototype by means of generating code suggestions and providing technical guidance for the system. The final implementation was then reviewed and adapted by the team.
 
 ---
 
@@ -250,6 +265,13 @@ Our current MVP includes:
 * Ka-Dunong AI tutoring chatbot
 * Student progress tracking interface
 * PDF upload and document submission functionality
+* Filipino NLP pipeline (RoBERTa-tl-cased)
+* AI-generated practice materials (quizzes, flashcards, and worked examples)
+* Personalized learner adaptation
+* Study planner and scheduling assistant
+* AI-powered note-taking
+* Smart Module Scanner (OCR for printed modules and handouts)
+* Gamification features (streaks, achievements, and learning milestones)
 
 ---
 
@@ -257,14 +279,7 @@ Our current MVP includes:
 
 The following features are planned for subsequent MVP iterations:
 
-* Filipino NLP pipeline (RoBERTa-tl-cased)
-* AI-generated practice materials (quizzes, flashcards, and worked examples)
-* Personalized learner adaptation
 * Offline AI inference and synchronization
-* Study planner and scheduling assistant
-* AI-powered note-taking
-* Smart Module Scanner (OCR for printed modules and handouts)
-* Gamification features (streaks, achievements, and learning milestones)
 
 ---
 
