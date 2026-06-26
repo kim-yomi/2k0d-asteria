@@ -71,7 +71,7 @@ Our production architecture is designed around an offline-first approach where:
 * Progress is stored locally
 * Synchronization happens when connectivity becomes available
 
-**This feature is currently unable to be implemented due to time constraints. But configuration is made to be simply implemented, as in swapping the two different AI APIs.**
+> This feature is currently unable to be implemented due to time constraints. But configuration is made to be simply implemented, as in swapping the two different AI APIs.
 
 ---
 
