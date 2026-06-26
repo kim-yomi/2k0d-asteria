@@ -40,7 +40,7 @@ const SUBJECTS = [
 
 const GRADES = Array.from({ length: 12 }, (_, i) => `Grade ${i + 1}`);
 
-const BACKEND = "http://localhost:8000";
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8000";
 
 // ─── Flashcard Viewer ─────────────────────────────────────────────────────────
 
