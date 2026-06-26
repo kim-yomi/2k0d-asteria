@@ -41,7 +41,7 @@ Ka-Dunong comes from the term used to address storytellers or wise men who told 
 
 Just as a narrator accompanies and leads the audience throughout a story, Ka-Dunong accompanies students throughout their educational journey, helping them understand each chapter rather than skipping to the direct answer or the ending.
 
----
+-
 
 Unlike general-purpose AI assistants, Ka-Dunong is designed around the realities of Philippine education.
 
