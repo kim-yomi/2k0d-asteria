@@ -147,6 +147,21 @@ This allows Ka-Dunong to recommend what students should study next based on comp
 
 ---
 
+## Adaptive Study Planner
+
+Never forget what you need to study and when to study it.
+
+The adaptive study planner provides the user the ability to:
+
+* Set specific tasks at certain dates and time
+* Have the AI model create specific study plans for the user
+* Be able to adjust your schedule depending on when you want to study
+* Have the AI model provide lessons to study tailored to the user's comprehension level
+
+This allows users to tailor their study sessions on when they're available and suited to their level of knowledge.
+
+---
+
 # Design Principles
 
 ## Built for Filipino Students
@@ -233,6 +248,12 @@ Ka-Dunong is built around five major components.
 * Identifies learning gaps and recurring misconceptions
 * Personalizes future tutoring sessions and study recommendations
 
+### 6. Adaptive Study Planner
+
+* Gives the ability to schedule study sessions and other important tasks
+* Allows the AI model to provide study plans tailored to the user
+* Allows for schedule adjustment depending on the user's availability
+
 ---
 
 # Technology Stack
@@ -292,3 +313,84 @@ We believe every Filipino learner deserves access to a patient tutor—regardles
 Ka-Dunong exists to make high-quality, adaptive personalized education more accessible for every student in the Philippines.
 
 > *Understand more. Memorize less. Learn with Ka-Dunong.*
+
+---
+
+## Setup
+
+The web app is live at https://ka-dunong.vercel.app. Follow these steps to get the project running locally (frontend + backend).
+
+- **NOTE**: An Anthropic API KEY is required to run the local deployment of the application. 
+
+- **Prerequisites**: Install Node.js (recommended LTS), npm, and Python 3.10+. Ensure `pip` is available. 
+
+- **Secrets & env files**: Create environment files for the frontend and backend:
+	- Frontend (Next.js): copy `ka-dunong/.env.example` to `ka-dunong/.env.local` and set your `ANTHROPIC_API_KEY` there.
+		- Example: [ka-dunong/.env.example](ka-dunong/.env.example)
+	- Backend (FastAPI): create or update `ka-dunong/backend/.env` with at minimum:
+
+		```env
+		ANTHROPIC_API_KEY=your_anthropic_api_key_here
+		# Optional: ANTHROPIC_MODEL=claude-sonnet-4-6
+		```
+
+	- There is an example backend env in the repo: [ka-dunong/backend/.env](ka-dunong/backend/.env.example)
+
+- **Frontend (Next.js)**
+
+	1. Install dependencies and run the dev server:
+
+	```bash
+	cd ka-dunong
+	npm install
+	npm run dev
+	```
+
+	2. Production build:
+
+	```bash
+	npm run build
+	npm start
+	```
+
+	- Useful: see `ka-dunong/package.json` for available scripts: [ka-dunong/package.json](ka-dunong/package.json)
+
+- **Backend (FastAPI + Uvicorn)**
+
+	1. Create a Python virtual environment and install requirements:
+
+	```bash
+	cd ka-dunong/backend
+	python -m venv .venv
+	# Windows
+	.venv\Scripts\activate
+	# macOS / Linux
+	# source .venv/bin/activate
+	pip install -r requirements.txt
+	```
+
+	2. Run the development server (auto-reload):
+
+	```bash
+	uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+	```
+
+	- Requirements are listed in: [ka-dunong/backend/requirements.txt](ka-dunong/backend/requirements.txt)
+	- The backend expects `ANTHROPIC_API_KEY` to be set (see `ka-dunong/backend/app/config.py`). Services that use it include `practice.py` and `claude.py`.
+
+- **Running locally (order)**
+
+	1. Start the backend first (port 8000 by default).
+	2. Start the frontend (`npm run dev`) and use the UI. The frontend will call API routes (or proxy) to the backend as configured.
+
+- **Security & best practices**
+
+	- Never commit `.env.local` or backend `.env` to source control. Add them to `.gitignore` if they are not already excluded.
+	- Rotate API keys if they are accidentally committed.
+
+- **Troubleshooting**
+
+	- If the frontend can't reach the backend, check CORS, ports, and whether the backend server is running.
+	- Verify `ANTHROPIC_API_KEY` is set and valid. Missing keys will raise errors in `ka-dunong/backend/app/services` (see `practice.py` and `claude.py`).
+
+---
