@@ -318,11 +318,13 @@ Ka-Dunong exists to make high-quality, adaptive personalized education more acce
 
 ## Setup
 
-Follow these steps to get the project running locally (frontend + backend).
+The web app is live at https://ka-dunong.vercel.app. Follow these steps to get the project running locally (frontend + backend).
 
-- **Prerequisites**: Install Node.js (recommended LTS), npm, and Python 3.10+. Ensure `pip` is available.
+- **NOTE**: An Anthropic API KEY is required to run the local deployment of the application. 
 
-- **Secrets & env files**: Do NOT commit secrets to the repository. Create environment files for the frontend and backend:
+- **Prerequisites**: Install Node.js (recommended LTS), npm, and Python 3.10+. Ensure `pip` is available. 
+
+- **Secrets & env files**: Create environment files for the frontend and backend:
 	- Frontend (Next.js): copy `ka-dunong/.env.example` to `ka-dunong/.env.local` and set your `ANTHROPIC_API_KEY` there.
 		- Example: [ka-dunong/.env.example](ka-dunong/.env.example)
 	- Backend (FastAPI): create or update `ka-dunong/backend/.env` with at minimum:
