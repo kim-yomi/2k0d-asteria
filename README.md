@@ -4,10 +4,10 @@
 
 **Team 2K0D**
 
-* Chorong Kim
-* Aloysious Charles Orbegoso
-* Denise Ruth Manalang
-* Lance Albert Aguila
+* Chorong Kim                 -  Front-end Developer, Graphic Designer, Researcher
+* Aloysious Charles Orbegoso  -  Full-Stack Developer, Researcher
+* Denise Ruth Manalang        -  Full-Stack Developer, Researcher
+* Lance Albert Aguila         -  Back-end Developer, Researcher
 
 ---
 
@@ -25,21 +25,21 @@ Most educational platforms are designed for a global audience—not specifically
 
 **Ka-Dunong AI** is an open-source AI study companion built specifically for Filipino K–12 learners.
 
-Rather than completing homework for students, Ka-Dunong acts like a patient tutor—guiding learners through questions, adapting explanations to their grade level, and encouraging deeper understanding through conversation.
+Inspired by the old wise men, storytellers, and narrators who helped lead and guide their audiences through epics and stories of old, our AI also takes on the role of narrator, similar to a patient tutor guiding learners through questions, adapting explanations to their grade level, and encouraging deeper understanding through conversation.
 
 Built around the **DepEd K–12 curriculum**, Ka-Dunong communicates naturally in **Taglish, Filipino, or English**, learns from student-uploaded learning materials, and is designed to work even in low-bandwidth environments.
 
 > **Our goal is simple: help students understand—not just answer.**
 
-Unlike traditional AI chatbots, Ka-Dunong continuously builds a learner profile to personalize explanations, identify knowledge gaps, and recommend what students should learn next.
+Unlike traditional AI chatbots, Ka-Dunong continuously builds a learner profile to personalize explanations, identify knowledge gaps, and recommend what students should learn next. And just like how the heroes in our favorite stories fight through all kinds of obstacles and enemies before getting to their destination, so do students who will learn through each problem, lesson, and material to achieve their educational goals.
 
 ---
 
 # Why "Ka-Dunong"?
 
-Ka-Dunong comes from the term used to address storytellers or wise men who told of the Bikolano epic, "Ibalon." Similarly, our AI takes on the role of a narrator, not by telling students the answers to their assignments and activities, but by guiding them through a learning journey of their own. 
+Ka-Dunong comes from the term used to address storytellers or wise men who told of the Bikolano epic, "Ibalon," who guided and entertained others through the story they told. The Dunong of olden times are not only storytellers, as wise men or "keepers of wisdom," they hold an abundance of knowledge only waiting to be shared to those willing to learn.
 
-Just as a narrator accompanies and leads the audience throughout a story, Ka-Dunong accompanies students throughout their educational journey, helping them understand each chapter rather than skipping to the direct answer or the ending.
+Similarly, our AI takes on a similar role, not by telling students the answers, but by guiding them through a learning journey of their own. 
 
 ---
 
@@ -140,6 +140,7 @@ It tracks:
 * MELC competency mastery
 * Practice history
 * Areas requiring review
+* Study habits
 * Learning preferences
 
 This allows Ka-Dunong to recommend what students should study next based on competencies they have not yet mastered.
@@ -165,6 +166,10 @@ Ka-Dunong embraces this while allowing students to practice in pure Filipino or 
 ## Works Where Students Are
 
 Designed for mid-range Android devices, limited connectivity, and low-bandwidth environments.
+
+## Learns with Students
+
+Through every study session and conversation, the AI model also learns through teaching the student and how to cooperate with students with how each one studies.
 
 ## Privacy First
 
@@ -222,7 +227,7 @@ Ka-Dunong is built around five major components.
 * Uses Retrieval-Augmented Generation (RAG)
 * Incorporates uploaded modules, PDFs, and textbooks
 
-### 5. Learner Model
+### 5. Adaptive Learner Model
 
 * Tracks competency mastery
 * Identifies learning gaps and recurring misconceptions
@@ -265,13 +270,10 @@ Our current MVP includes:
 * Ka-Dunong AI tutoring chatbot
 * Student progress tracking interface
 * PDF upload and document submission functionality
-* Filipino NLP pipeline (RoBERTa-tl-cased)
 * AI-generated practice materials (quizzes, flashcards, and worked examples)
 * Personalized learner adaptation
-* Study planner and scheduling assistant
-* AI-powered note-taking
-* Smart Module Scanner (OCR for printed modules and handouts)
-* Gamification features (streaks, achievements, and learning milestones)
+* Adaptive study planner and study coach
+* Gamification features (streaks, points-based practice quizzes, )
 
 ---
 
@@ -287,6 +289,6 @@ The following features are planned for subsequent MVP iterations:
 
 We believe every Filipino learner deserves access to a patient tutor—regardless of where they live, what language they speak, or whether they can afford private tutoring.
 
-Ka-Dunong exists to make high-quality, personalized education more accessible for every student in the Philippines.
+Ka-Dunong exists to make high-quality, adaptive personalized education more accessible for every student in the Philippines.
 
 > *Understand more. Memorize less. Learn with Ka-Dunong.*
