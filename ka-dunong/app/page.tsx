@@ -250,7 +250,7 @@ export default function HomePage() {
             </div>
 
             {/* Bird — bottom-left of chat */}
-            <div className="absolute bottom-10 left-[-20%] flex items-end gap-0 z-20 group cursor-default">
+            <div className="absolute bottom-10 left-[-20%] hidden lg:flex items-end gap-0 z-20 group cursor-default">
               <Image
                 src="/bird-happy.png"
                 alt="Dunong, the Ka-Dunong mascot"
@@ -276,7 +276,7 @@ export default function HomePage() {
                 alt="Curious Dunong"
                 width={72}
                 height={72}
-                className="object-contain flex-shrink-0 hover:-translate-y-3 transition-transform duration-300 ease-out"
+                className="hidden md:block object-contain flex-shrink-0 hover:-translate-y-3 transition-transform duration-300 ease-out"
               />
             </div>
             <p className="text-[#3d3535]/60 text-lg max-w-xl text-center">
@@ -304,7 +304,7 @@ export default function HomePage() {
       {/* ── Language Modes ── */}
       <section className="bg-[#3d3535] py-20 text-white relative overflow-hidden">
         {/* Bird peeking from left */}
-        <div className="absolute left-0 bottom-0 translate-y-1/2 z-10 pointer-events-none flex flex-col items-center">
+        <div className="absolute left-0 bottom-0 translate-y-1/2 z-10 pointer-events-none hidden md:flex flex-col items-center">
           <Image
             src="/bird-sad.png"
             alt="Dunong peeking"
@@ -421,7 +421,7 @@ export default function HomePage() {
         </div>
 
         {/* Bird at bottom */}
-        <div className="absolute bottom-0 left-[8%] translate-y-1/2 pointer-events-none z-10">
+        <div className="absolute bottom-0 left-[8%] translate-y-1/2 pointer-events-none z-10 hidden md:block">
           <Image
             src="/bird-curious.png"
             alt="Curious Dunong"
@@ -435,7 +435,10 @@ export default function HomePage() {
       {/* ── Final CTA ── */}
       <section className="bg-[#c97e82] pt-28 pb-20">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <div className="relative inline-flex flex-col items-center justify-center mb-6">
+          <h2 className="md:hidden text-3xl font-bold text-white leading-tight px-6 mb-6">
+            Handa ka na bang mag-aral?
+          </h2>
+          <div className="hidden md:inline-flex relative flex-col items-center justify-center mb-6">
             <Image
               src="/bird-happy.png"
               alt="Dunong cheering"
