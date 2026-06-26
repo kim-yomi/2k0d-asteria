@@ -4,10 +4,10 @@
 
 **Team 2K0D**
 
-* Chorong Kim                 -  Front-end Developer, Graphic Designer, Researcher
-* Aloysious Charles Orbegoso  -  Full-Stack Developer, Researcher
-* Denise Ruth Manalang        -  Full-Stack Developer, Researcher
-* Lance Albert Aguila         -  Back-end Developer, Researcher
+* Chorong Kim -  Front-end Developer, Graphic Designer, Researcher
+* Aloysious Charles Orbegoso -  Full-Stack Developer, Researcher
+* Denise Ruth Manalang -  Full-Stack Developer, Researcher
+* Lance Albert Aguila -  Back-end Developer, Researcher
 
 ---
 
