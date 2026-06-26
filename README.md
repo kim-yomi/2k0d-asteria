@@ -201,7 +201,7 @@ Ka-Dunong is built around five major components.
 * Supports fully local AI inference (production)
 * Synchronizes data when internet connectivity becomes available
 
-**This feature is currently unable to be implemented due to time constraints. But configuration is made to be simply implemented, as in swapping the two different AI APIs.**
+> This feature is currently unable to be implemented due to time constraints. But configuration is made to be simply implemented, as in swapping the two different AI APIs.
 
 ### 2. Adaptive Language Layer
 
