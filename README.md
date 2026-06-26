@@ -147,6 +147,21 @@ This allows Ka-Dunong to recommend what students should study next based on comp
 
 ---
 
+## Adaptive Study Planner
+
+Never forget what you need to study and when to study it.
+
+The adaptive study planner provides the user the ability to:
+
+* Set specific tasks at certain dates and time
+* Have the AI model create specific study plans for the user
+* Be able to adjust your schedule depending on when you want to study
+* Have the AI model provide lessons to study tailored to the user's comprehension level
+
+This allows users to tailor their study sessions on when they're available and suited to their level of knowledge.
+
+---
+
 # Design Principles
 
 ## Built for Filipino Students
@@ -232,6 +247,12 @@ Ka-Dunong is built around five major components.
 * Tracks competency mastery
 * Identifies learning gaps and recurring misconceptions
 * Personalizes future tutoring sessions and study recommendations
+
+### 6. Adaptive Study Planner
+
+* Gives the ability to schedule study sessions and other important tasks
+* Allows the AI model to provide study plans tailored to the user
+* Allows for schedule adjustment depending on the user's availability
 
 ---
 
