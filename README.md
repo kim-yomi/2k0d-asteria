@@ -35,7 +35,13 @@ Unlike traditional AI chatbots, Ka-Dunong continuously builds a learner profile 
 
 ---
 
-# Why Ka-Dunong?
+# Why "Ka-Dunong"?
+
+Ka-Dunong comes from the term used to address storytellers or wise men who told of the Bikolano epic, "Ibalon." Similarly, our AI takes on the role of a narrator, not by telling students the answers to their assignments and activities, but by guiding them through a learning journey of their own. 
+
+Just as a narrator accompanies and leads the audience throughout a story, Ka-Dunong accompanies students throughout their educational journey, helping them understand each chapter rather than skipping to the direct answer or the ending.
+
+---
 
 Unlike general-purpose AI assistants, Ka-Dunong is designed around the realities of Philippine education.
 
@@ -51,19 +57,6 @@ Unlike general-purpose AI assistants, Ka-Dunong is designed around the realities
 ---
 
 # Core Features
-
-## Offline-First
-
-Learning shouldn't stop because internet access does.
-
-Our production architecture is designed around an offline-first approach where:
-
-* AI models run locally
-* Learning materials stay on-device
-* Progress is stored locally
-* Synchronization happens when connectivity becomes available
-
----
 
 ## Socratic AI Tutor
 
@@ -133,6 +126,19 @@ It tracks:
 * Learning preferences
 
 This allows Ka-Dunong to recommend what students should study next based on competencies they have not yet mastered.
+
+---
+
+## Offline-First
+
+Learning shouldn't stop because internet access does.
+
+Our production architecture is designed around an offline-first approach where:
+
+* AI models run locally
+* Learning materials stay on-device
+* Progress is stored locally
+* Synchronization happens when connectivity becomes available
 
 ---
 
